@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_175126) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_112634) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -56,20 +56,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_175126) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "type_states", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_events", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "event_id", null: false
-    t.integer "type_state_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["event_id"], name: "index_user_events_on_event_id"
-    t.index ["type_state_id"], name: "index_user_events_on_type_state_id"
     t.index ["user_id"], name: "index_user_events_on_user_id"
   end
 
@@ -83,6 +76,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_175126) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "user_events", "events"
-  add_foreign_key "user_events", "type_states"
   add_foreign_key "user_events", "users"
 end

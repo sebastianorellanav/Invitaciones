@@ -6,10 +6,11 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-TypeState.create(name: "No responde")
-TypeState.create(name: "Asiste")
-TypeState.create(name: "No asiste")
-
 User.create(name: "Sebastian Orellana", email:"sebastian@gmail.com")
 User.create(name: "Jhon Kazh", email:"jhonk@gmail.com")
 User.create(name: "Felipe Rivas", email:"fpriz@gmail.com")
+
+Event.create(name: "Evento de innovación", date:"2024-01-01", description:"Evento para innovación y el desarrollo")
+Event.create(name: "Feria universitaria", date:"2024-01-01", description:"Evento para postulantes a universidades")
+
+

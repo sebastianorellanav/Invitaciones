@@ -35,6 +35,13 @@
             <div class="mb-3">
               <%= f.label :description, class: "my-3" %>
               <%= f.rich_text_area :description, class: "form-control" %>
+              <% if event.errors.messages.any? %>
+                <% if event.errors.messages.key?(:description) %>
+                  <div class="text-danger">
+                    <%= event.errors.messages[:description][0] %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
             <div class="text-center">
               <%= f.submit "Crear Evento", class: "btn btn-primary mt-4" %>

@@ -29,7 +29,7 @@ class UserEventsController < ApplicationController
       @user.save
       puts "Se crea el nuevo usuario"
     end
-    @user_event = UserEvent.new(user_id: @user.id, event_id: user_event_params[:event_id], type_state_id: 1)
+    @user_event = UserEvent.new(user_id: @user.id, event_id: user_event_params[:event_id], state: "No responde")
 
     respond_to do |format|
       if @user_event.save
@@ -66,13 +66,22 @@ class UserEventsController < ApplicationController
   end
 
   def change_state
-    puts params
-    puts "hola"
     @user_event = UserEvent.find_by_id(params[:id])
-    @user_event.update(type_state_id: params[:new_state])
-    respond_to do |format|
-      format.html { redirect_to user_events_url, notice: "Se ha actualizado el estado de la invitación." }
-      format.json { head :no_content }
+    if @user_event
+      if @user_event.state == "No responde"
+        @user_event.update(state: params[:new_state])
+        respond_to do |format|
+          format.html { redirect_to user_events_url, notice: "Se ha actualizado el estado de la invitación." }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user_event.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      render status: :not_found, json: { error: "UserEvent no encontrado" }
     end
   end
 
@@ -84,6 +93,6 @@ class UserEventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_event_params
-      params.require(:user_event).permit(:user_id, :event_id, :type_state_id, :email)
+      params.require(:user_event).permit(:user_id, :event_id, :state, :email)
     end
 end

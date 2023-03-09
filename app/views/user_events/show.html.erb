@@ -30,12 +30,22 @@
             <div class="d-flex">
             <p class="card-text fw-bold mx-3">
             Invitado: 
-          </p><%= @user_event.user.name%>
+          </p><%= @user_event.user.email%>
             </div>
 
           <div class="d-flex justify-content-center mt-3">
-            <%= button_to 'Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => 2}, :method => :post, class:"btn btn-success my-2 mx-3 p-3" %>
-            <%= button_to 'No Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => 3}, :method => :post, class:"btn btn-danger my-2 mx-3 p-3" %>
+            <% if @user_event.state == "No responde" %>
+            <%= button_to 'Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => "Asiste"}, :method => :post, class:"btn btn-success my-2 mx-3 p-3" %>
+            <%= button_to 'No Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => "No asiste"}, :method => :post, class:"btn btn-danger my-2 mx-3 p-3" %>
+            <%else%>
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= @user_event.state%>
+                  </p>
+                </div>
+              </div>
+            <%end%>
             </div>
         </div>
       </div>

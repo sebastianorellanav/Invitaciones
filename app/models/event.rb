@@ -1,11 +1,12 @@
 class Event < ApplicationRecord
   has_rich_text :description
-  has_many :user_events
+  has_many :user_events, dependent: :delete_all
   has_many :users, through: :user_events
 
   validate :date_cannot_be_in_the_past
   validates :name, presence: { message: "El campo nombre es requerido." }
   validates :date, presence: { message: "El campo fecha es requerido." }
+  validates :description, presence: { message: "El campo descripción es requerido." }
 
   def date_cannot_be_in_the_past
     if date.present? && date < Date.today

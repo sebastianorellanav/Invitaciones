@@ -17,7 +17,8 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user_event" do
     assert_difference("UserEvent.count") do
-      post user_events_url, params: { user_event: { event_id: @user_event.event_id, type_state_id: @user_event.type_state_id, user_id: @user_event.user_id } }
+      #post user_events_url, params: { user_event: { event_id: @user_event.event_id, type_state_id: @user_event.type_state_id, user_id: @user_event.user_id } }
+      post user_events_url, params: { user_event: { event_id: @user_event.event_id, type_state_id: @user_event.type_state_id }, email: {} }
     end
 
     assert_redirected_to user_event_url(UserEvent.last)
