@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6">
+          <div class="row mx-3">
+      <div class="col-sm-12 d-flex justify-content-end  mx-5">
+          <%= link_to "Crear Evento", new_event_path, class: "btn btn-success"%>
+
+      </div>
+    </div>
+      <%= form_with(model: user_event) do |f|%>
+        <div class="mb-3">
+          <%= f.label :event_id, "Selecciona un evento", class:"my-3"%>
+          <%= f.select :event_id, options_for_select(Event.all.map{|e| [e.name, e.id]}), {}, {class: "form-select"} %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :email, "Correo electrónico del invitado", class:"my-3" %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+          <%= f.hidden_field :type_state_id, :value => 1 %>
+        <div class="text-center">
+          <%= f.submit "Enviar Invitación", class: "btn btn-primary mt-4" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

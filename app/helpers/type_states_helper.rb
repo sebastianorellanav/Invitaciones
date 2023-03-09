@@ -1,0 +1,2 @@
+module TypeStatesHelper
+end

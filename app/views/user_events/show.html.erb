@@ -1,0 +1,57 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container">
+  <div class="row my-4 py-4 mb-1 pb-1">
+    <div class="col-sm-12 d-flex justify-content-center mb-0">
+      <h1 class="text-center display-2"><p class="fw-bold">Invitación</h1></p>
+    </div>
+  </div>
+
+  <div class="row mt-1 pt-1 my-3 py-4 justify-content-center">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <div class="card w-75">
+        <div class="card-header">
+          Descripción de la invitación
+        </div>
+        <div class="card-body">
+        <div class="card-body text-dark">
+          <div class="d-flex mb-2">
+            <p class="card-text fw-bold mx-3">
+            Evento: 
+          </p><%= @user_event.event.name%>
+            </div>
+
+            <div class="d-flex mb-2">
+            <p class="card-text fw-bold mx-3">
+            Fecha: 
+          </p><%= @user_event.event.date%>
+            </div>
+
+            <div class="d-flex">
+            <p class="card-text fw-bold mx-3">
+            Invitado: 
+          </p><%= @user_event.user.name%>
+            </div>
+
+          <div class="d-flex justify-content-center mt-3">
+            <%= button_to 'Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => 2}, :method => :post, class:"btn btn-success my-2 mx-3 p-3" %>
+            <%= button_to 'No Asistiré', {:action => "change_state", :id => @user_event.id}, :params => {:new_state => 3}, :method => :post, class:"btn btn-danger my-2 mx-3 p-3" %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 pt-3 mb-4">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <%= link_to "Volver", user_events_path %>
+    </div>
+  </div>
+
+    
+
+</div>
+
+
+
+

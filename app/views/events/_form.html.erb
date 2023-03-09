@@ -1,0 +1,46 @@
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <%= form_with(model: event) do |f| %>
+            <div class="mb-3">
+              <%= f.label :name, "Nombre del evento", { class: "my-3" } %>
+              <%= f.text_field :name, class: "form-control" %>
+              <% if event.errors.messages.any? %>
+                <% if event.errors.messages.key?(:name) %>
+                  <div class="text-danger">
+                    <%= event.errors.messages[:name][0] %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :date, class: "my-3" %>
+              <%= f.date_field :date, class: "form-control" %>
+              <% if event.errors.messages.any? %>
+                <% if event.errors.messages.key?(:date) %>
+                  <div class="text-danger">
+                    <%= event.errors.messages[:date][0] %>
+                  </div>
+                <% end %>
+                <% if event.errors.messages.key?(:date_past) %>
+                  <div class="text-danger">
+                    <%= event.errors.messages[:date_past][0] %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :description, class: "my-3" %>
+              <%= f.rich_text_area :description, class: "form-control" %>
+            </div>
+            <div class="text-center">
+              <%= f.submit "Crear Evento", class: "btn btn-primary mt-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
